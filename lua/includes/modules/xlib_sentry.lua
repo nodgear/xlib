@@ -76,7 +76,9 @@ local config = {
 	release = nil,
 	environment = nil,
 	server_name = nil,
-	no_detour = {},
+	no_detour = {
+		"hook.Call"
+	},
 }
 
 --
@@ -1422,7 +1424,7 @@ local function doDetours()
 	for _, funcname in ipairs(config["no_detour"]) do
 		no_detour[funcname] = true;
 	end
-
+	no_detour["hook.Call"] = true;
 	for _, deets in pairs(toDetour) do
 		if (not no_detour[deets.target]) then
 			local detour = createDetour(deets.override, deets.target, deets.module);
