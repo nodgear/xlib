@@ -133,3 +133,22 @@ end
 function AwUI:DrawRoundedBox(radius, x, y, w, h, col)
 	AwUI:DrawRoundedBoxEx(radius, x, y, w, h, col, true, true, true, true)
 end
+
+local matLoading = Material("xenin/loading.png", "smooth")
+
+function AwUI:DrawLoadingCircle(x, y, size, col)
+  surface.SetMaterial(matLoading)
+  surface.SetDrawColor(col or ColorAlpha(XeninUI.Theme.Accent, 100))
+  AwUI:DrawRotatedTexture(x, y, size, size, ((ct or CurTime()) % 360) * -100)
+end
+
+function AwUI:DrawRotatedTexture( x, y, w, h, angle, cx, cy )
+	cx,cy = cx or w/2,cy or w/2
+	if( cx == w/2 and cy == w/2 ) then
+		surface.DrawTexturedRectRotated( x, y, w, h, angle )
+	else	
+		local vec = Vector( w/2-cx, cy-h/2, 0 )
+		vec:Rotate( Angle(180, angle, -180) )
+		surface.DrawTexturedRectRotated( x-vec.x, y+vec.y, w, h, angle )
+	end
+end
