@@ -206,7 +206,11 @@ function Query:run(...)
 					s = self.sequence.database:escape(s)
 				end
 
-				sql = sql .. "'" .. s .. "'"
+				if isnumber(s) then
+					sql = sql .. s
+				else
+					sql = sql .. "'" .. s .. "'"
+				end
 			else
 				sql = sql .. c
 			end
