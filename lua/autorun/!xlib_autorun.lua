@@ -15,3 +15,6 @@ else
         include("includes/modules/xlib.lua")
     end
 end
+
+AddCSLuaFile("awui/awui.lua")
+include("awui/awui.lua")
