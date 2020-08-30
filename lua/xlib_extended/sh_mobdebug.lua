@@ -1,6 +1,5 @@
 if CLIENT then return end
-require "credentialstore"
-if CREDENTIALS.production then return end
+if CREDENTIALS and CREDENTIALS.production then return end
 
 local succ, err = pcall(require, "mobdebug")
 if not succ then
